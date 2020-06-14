@@ -1,0 +1,3 @@
+rootProject.name = 'play_code'
+include 'test-examples'
+
