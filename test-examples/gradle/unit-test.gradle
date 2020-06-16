@@ -1,0 +1,51 @@
+apply plugin: 'jacoco'
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+def classFiles = { classDirectories ->
+    files(classDirectories.files.collect {
+        fileTree(dir: it, includes: [
+                'top/bujiaban/test/application/**/*',
+                'top/bujiaban/test/domain/**/*',
+        ])
+    })
+}
+
+jacocoTestReport {
+    dependsOn test
+    finalizedBy jacocoTestCoverageVerification
+
+    afterEvaluate {
+        classDirectories = classFiles(classDirectories)
+    }
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        classDirectories = classFiles(classDirectories)
+    }
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.85
+            }
+        }
+
+        rule {
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.85
+            }
+        }
+    }
+}

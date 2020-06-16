@@ -9,9 +9,9 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
 }
-apply from: './dependencies.gradle'
+apply from: './gradle/dependencies.gradle'
+apply from: './gradle/integration-test.gradle'
+apply from: './gradle/unit-test.gradle'
 
-
-test {
-    useJUnitPlatform()
-}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8

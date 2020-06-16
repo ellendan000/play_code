@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: 123456
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+mariaDB4j:
+  databaseName: key-metrics
+  port: 3307
+  dataDir: mariadb/data/local
+  baseDir: mariadb
