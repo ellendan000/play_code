@@ -9,3 +9,6 @@ build
 
 # Ignore macOS files
 .DS_Store
+
+# Ignore test mariaDB files
+**/mariadb
