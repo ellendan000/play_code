@@ -1,35 +1,42 @@
-apply plugin: 'jacoco'
-
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
+    finalizedBy 'jacocoTestReportForUnitTest'
 }
+
+apply plugin: 'jacoco'
 
 jacoco {
     toolVersion = "0.8.5"
 }
 
-def classFiles = { classDirectories ->
-    files(classDirectories.files.collect {
+def classFiles = files(files("$buildDir/classes/java/main").files.collect {
         fileTree(dir: it, includes: [
                 'top/bujiaban/test/application/**/*',
                 'top/bujiaban/test/domain/**/*',
         ])
     })
-}
+def sourceFiles = files('./src/main/java', "${buildDir}/generated/sources/annotationProcessor/java")
 
-jacocoTestReport {
+task jacocoTestReportForUnitTest(type: JacocoReport) {
     dependsOn test
-    finalizedBy jacocoTestCoverageVerification
+    finalizedBy 'jacocoTestCoverageVerificationForUnitTest'
+    executionData test
 
+    reports {
+        csv.enabled false
+        xml.destination file("${buildDir}/reports/jacoco/test/xml")
+        html.destination file("${buildDir}/reports/jacoco/test/html")
+    }
     afterEvaluate {
-        classDirectories = classFiles(classDirectories)
+        getSourceDirectories().setFrom(sourceFiles)
+        getClassDirectories().setFrom(classFiles)
     }
 }
 
-jacocoTestCoverageVerification {
+task jacocoTestCoverageVerificationForUnitTest(type: JacocoCoverageVerification) {
+    executionData test
     afterEvaluate {
-        classDirectories = classFiles(classDirectories)
+        getClassDirectories().setFrom(classFiles)
     }
     violationRules {
         rule {

@@ -8,10 +8,19 @@ buildscript {
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id "org.sonarqube" version "2.7"
 }
 apply from: './gradle/dependencies.gradle'
-apply from: './gradle/integration-test.gradle'
 apply from: './gradle/unit-test.gradle'
+apply from: './gradle/integration-test.gradle'
+apply from: './gradle/sonar.gradle'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+sonarqube {
+    properties {
+        property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
+        property "sonar.jacoco.integReportPaths", "${buildDir}/jacoco/integTest.exec"
+    }
+}

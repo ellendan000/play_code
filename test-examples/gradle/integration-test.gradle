@@ -32,6 +32,55 @@ task integTest(type: Test) {
     shouldRunAfter test
 
     useJUnitPlatform()
+    forkEvery = 5
+    maxParallelForks = Runtime.runtime.availableProcessors() / 2
+
+    finalizedBy 'jacocoTestReportForIntegTest'
+}
+check.dependsOn integTest
+
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.8.5"
 }
 
-check.dependsOn integTest
+def classFiles = files(files("$buildDir/classes/java/main").files.collect {
+    fileTree(dir: it, includes: [
+            'top/bujiaban/test/interfaces/**/*',
+            'top/bujiaban/test/infrastructure/**/*',
+    ])
+})
+def sourceFiles = files('./src/main/java', "${buildDir}/generated/sources/annotationProcessor/java/main")
+
+task jacocoTestReportForIntegTest(type: JacocoReport) {
+    dependsOn integTest
+    finalizedBy 'jacocoTestCoverageVerificationForIntegTest'
+    executionData integTest
+
+    reports {
+        csv.enabled false
+        xml.destination file("${buildDir}/reports/jacoco/integTest/xml")
+        html.destination file("${buildDir}/reports/jacoco/integTest/html")
+    }
+
+    afterEvaluate {
+        getClassDirectories().setFrom(classFiles)
+        getSourceDirectories().setFrom(sourceFiles)
+    }
+}
+
+task jacocoTestCoverageVerificationForIntegTest(type: JacocoCoverageVerification) {
+    executionData integTest
+    afterEvaluate {
+        getClassDirectories().setFrom(classFiles)
+    }
+    violationRules {
+        rule {
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.95
+            }
+        }
+    }
+}
