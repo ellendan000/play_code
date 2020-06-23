@@ -17,10 +17,3 @@ apply from: './gradle/sonar.gradle'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-sonarqube {
-    properties {
-        property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
-        property "sonar.jacoco.integReportPaths", "${buildDir}/jacoco/integTest.exec"
-    }
-}

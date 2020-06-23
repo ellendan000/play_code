@@ -48,9 +48,11 @@ def classFiles = files(files("$buildDir/classes/java/main").files.collect {
     fileTree(dir: it, includes: [
             'top/bujiaban/test/interfaces/**/*',
             'top/bujiaban/test/infrastructure/**/*',
+    ], excludes: [
+            "**/*MapperImpl.class"
     ])
 })
-def sourceFiles = files('./src/main/java', "${buildDir}/generated/sources/annotationProcessor/java/main")
+def sourceFiles = files('./src/main/java')
 
 task jacocoTestReportForIntegTest(type: JacocoReport) {
     dependsOn integTest
@@ -59,7 +61,8 @@ task jacocoTestReportForIntegTest(type: JacocoReport) {
 
     reports {
         csv.enabled false
-        xml.destination file("${buildDir}/reports/jacoco/integTest/xml")
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/integTest.xml")
         html.destination file("${buildDir}/reports/jacoco/integTest/html")
     }
 

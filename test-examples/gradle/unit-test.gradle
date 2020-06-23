@@ -13,9 +13,11 @@ def classFiles = files(files("$buildDir/classes/java/main").files.collect {
         fileTree(dir: it, includes: [
                 'top/bujiaban/test/application/**/*',
                 'top/bujiaban/test/domain/**/*',
+        ], excludes: [
+                "**/*MapperImpl.class"
         ])
     })
-def sourceFiles = files('./src/main/java', "${buildDir}/generated/sources/annotationProcessor/java")
+def sourceFiles = files('./src/main/java')
 
 task jacocoTestReportForUnitTest(type: JacocoReport) {
     dependsOn test
@@ -24,7 +26,8 @@ task jacocoTestReportForUnitTest(type: JacocoReport) {
 
     reports {
         csv.enabled false
-        xml.destination file("${buildDir}/reports/jacoco/test/xml")
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/unitTest.xml")
         html.destination file("${buildDir}/reports/jacoco/test/html")
     }
     afterEvaluate {
