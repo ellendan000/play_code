@@ -16,7 +16,7 @@ public class LatestPipelineInfoResponse {
     @Data
     @Builder
     @AllArgsConstructor
-    static class LatestEnvironmentInfo {
+    public static class LatestEnvironmentInfo {
         private String name;
         private Long sequence;
     }

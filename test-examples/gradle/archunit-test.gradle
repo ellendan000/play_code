@@ -1,0 +1,29 @@
+sourceSets {
+    archUnitTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    archUnitTestImplementation.extendsFrom implementation
+    archUnitTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
+dependencies {
+    archUnitTestImplementation 'com.tngtech.archunit:archunit-junit5:0.14.1'
+    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-api'
+    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-params'
+    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+task archUnitTest(type: Test) {
+    description = 'Runs arch unit tests.'
+    group = 'tests'
+
+    testClassesDirs = sourceSets.archUnitTest.output.classesDirs
+    classpath = sourceSets.archUnitTest.runtimeClasspath
+
+    useJUnitPlatform()
+}
+test.dependsOn archUnitTest

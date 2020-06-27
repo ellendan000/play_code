@@ -1,0 +1,99 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+ext {
+    classFilesIncludes = [
+            unitTest : [
+                    'top/bujiaban/test/application/**/*',
+                    'top/bujiaban/test/domain/**/*',
+            ],
+            integTest: [
+                    'top/bujiaban/test/interfaces/**/*',
+                    'top/bujiaban/test/infrastructure/**/*',
+            ]
+    ]
+    coverageViolationRules = [
+            unitTest : {
+                rule {
+                    limit {
+                        counter = 'LINE'
+                        value = 'COVEREDRATIO'
+                        minimum = 0.95
+                    }
+                }
+
+                rule {
+                    limit {
+                        counter = 'BRANCH'
+                        value = 'COVEREDRATIO'
+                        minimum = 0.95
+                    }
+                }
+            },
+            integTest: {
+                rule {
+                    limit {
+                        counter = 'BRANCH'
+                        value = 'COVEREDRATIO'
+                        minimum = 0.95
+                    }
+                }
+            }
+    ]
+}
+
+unitTest.finalizedBy("jacocoTestReportForUnitTest")
+integTest.finalizedBy("jacocoTestReportForIntegTest")
+
+def classFiles = { testName ->
+    files(files("${buildDir}/classes/java/main").files.collect {
+        fileTree(dir: it, includes: classFilesIncludes[testName], excludes: [
+                "**/*MapperImpl.class"
+        ])
+    })
+}
+def sourceFiles = files('./src/main/java')
+
+tasks.addRule("Pattern: jacocoTestReportFor<TestType>") {
+    String taskName ->
+        def matcher = taskName =~ /jacocoTestReportFor(\w+(Test))/
+        if (matcher.size() > 0) {
+            def capitalizeTestName = matcher[0][1]
+            def testName = capitalizeTestName.uncapitalize()
+
+            task("jacocoTestReportFor${capitalizeTestName}", type: JacocoReport) {
+                dependsOn tasks.getByName(testName)
+                finalizedBy "jacocoTestCoverageVerificationFor${capitalizeTestName}"
+
+                executionData tasks.getByName(testName)
+                getSourceDirectories().setFrom(sourceFiles)
+                getClassDirectories().setFrom(classFiles(testName))
+
+                reports {
+                    csv.enabled false
+                    xml.enabled true
+                    xml.destination file("${buildDir}/reports/jacoco/${testName}.xml")
+                    html.destination file("${buildDir}/reports/jacoco/${testName}/html")
+                }
+            }
+        }
+}
+
+tasks.addRule("Pattern: jacocoTestCoverageVerificationFor<TestType>") {
+    String taskName ->
+        def matcher = taskName =~ /jacocoTestCoverageVerificationFor(\w+(Test))/
+        if (matcher.size() > 0) {
+            def capitalizeTestName = matcher[0][1]
+            def testName = capitalizeTestName.uncapitalize()
+
+            task("jacocoTestCoverageVerificationFor${capitalizeTestName}", type: JacocoCoverageVerification) {
+                executionData tasks.getByName(testName)
+                getClassDirectories().setFrom(classFiles(testName))
+
+                violationRules coverageViolationRules[testName]
+            }
+        }
+}

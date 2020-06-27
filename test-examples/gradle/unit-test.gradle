@@ -1,61 +1,38 @@
-test {
+sourceSets {
+    unitTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.junit:junit-bom:5.3.2"
+    }
+}
+
+configurations {
+    unitTestImplementation.extendsFrom testImplementation
+}
+
+dependencies {
+    unitTestImplementation 'org.junit.jupiter:junit-jupiter-api'
+    unitTestImplementation 'org.junit.jupiter:junit-jupiter-params'
+    unitTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    unitTestImplementation "org.mockito:mockito-core:2.22.0"
+    unitTestImplementation "org.mockito:mockito-junit-jupiter:2.22.0"
+    unitTestImplementation "org.assertj:assertj-core:3.11.1"
+}
+
+task unitTest(type: Test) {
+    description = 'Runs unit tests.'
+    group = 'tests'
+
+    testClassesDirs = sourceSets.unitTest.output.classesDirs
+    classpath = sourceSets.unitTest.runtimeClasspath
+
     useJUnitPlatform()
-    finalizedBy 'jacocoTestReportForUnitTest'
 }
-
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = "0.8.5"
-}
-
-def classFiles = files(files("$buildDir/classes/java/main").files.collect {
-        fileTree(dir: it, includes: [
-                'top/bujiaban/test/application/**/*',
-                'top/bujiaban/test/domain/**/*',
-        ], excludes: [
-                "**/*MapperImpl.class"
-        ])
-    })
-def sourceFiles = files('./src/main/java')
-
-task jacocoTestReportForUnitTest(type: JacocoReport) {
-    dependsOn test
-    finalizedBy 'jacocoTestCoverageVerificationForUnitTest'
-    executionData test
-
-    reports {
-        csv.enabled false
-        xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/unitTest.xml")
-        html.destination file("${buildDir}/reports/jacoco/test/html")
-    }
-    afterEvaluate {
-        getSourceDirectories().setFrom(sourceFiles)
-        getClassDirectories().setFrom(classFiles)
-    }
-}
-
-task jacocoTestCoverageVerificationForUnitTest(type: JacocoCoverageVerification) {
-    executionData test
-    afterEvaluate {
-        getClassDirectories().setFrom(classFiles)
-    }
-    violationRules {
-        rule {
-            limit {
-                counter = 'LINE'
-                value = 'COVEREDRATIO'
-                minimum = 0.85
-            }
-        }
-
-        rule {
-            limit {
-                counter = 'BRANCH'
-                value = 'COVEREDRATIO'
-                minimum = 0.85
-            }
-        }
-    }
-}
+test.dependsOn unitTest

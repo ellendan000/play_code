@@ -11,8 +11,12 @@ plugins {
     id "org.sonarqube" version "2.7"
 }
 apply from: './gradle/dependencies.gradle'
+
 apply from: './gradle/unit-test.gradle'
 apply from: './gradle/integration-test.gradle'
+apply from: './gradle/api-test.gradle'
+apply from: './gradle/archunit-test.gradle'
+apply from: './gradle/jacoco.gradle'
 apply from: './gradle/sonar.gradle'
 
 sourceCompatibility = 1.8
