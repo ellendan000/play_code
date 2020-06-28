@@ -5,9 +5,10 @@ repositories {
 }
 
 dependencyManagement {
-//    imports {
-//        mavenBom "org.junit:junit-bom:5.3.2"
-//    }
+    imports {
+        mavenBom "org.junit:junit-bom:5.3.2"
+        mavenBom "org.springframework.cloud:spring-cloud-contract-dependencies:${contractVerifierVersion}"
+    }
 
     dependencies {
         dependency "org.projectlombok:lombok:1.18.12"
@@ -36,14 +37,25 @@ dependencies {
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
 
-//    testCompileOnly "org.projectlombok:lombok"
-//    testAnnotationProcessor 'org.projectlombok:lombok'
-//    testImplementation lib.basicTest
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:0.14.1'
 
-//    integTestImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    integTestImplementation 'org.springframework.security:spring-security-test'
-//    integTestImplementation 'io.rest-assured:rest-assured:3.2.0'
-//    integTestImplementation 'io.rest-assured:spring-mock-mvc:3.2.0'
-//    integTestImplementation 'ch.vorburger.mariaDB4j:mariaDB4j-springboot:2.4.0'
-//    integTestImplementation 'org.mariadb.jdbc:mariadb-java-client:2.2.5'
+    testImplementation "org.mockito:mockito-core:2.22.0"
+    testImplementation "org.mockito:mockito-junit-jupiter:2.22.0"
+    testImplementation "org.assertj:assertj-core:3.11.1"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'io.rest-assured:rest-assured:3.2.0'
+    testImplementation 'io.rest-assured:spring-mock-mvc:3.2.0'
+    testImplementation 'ch.vorburger.mariaDB4j:mariaDB4j:2.4.0'
+    testImplementation 'org.mariadb.jdbc:mariadb-java-client:2.4.0'
+
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+
+    testCompileOnly "org.projectlombok:lombok"
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
 }

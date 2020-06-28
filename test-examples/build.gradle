@@ -3,19 +3,24 @@ buildscript {
         mavenCentral()
         maven { url 'https://repo.spring.io/release/' }
     }
+    ext {
+        contractVerifierVersion = "2.1.4.RELEASE"
+    }
 }
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id "org.springframework.cloud.contract" version "${contractVerifierVersion}"
     id "org.sonarqube" version "2.7"
 }
+
 apply from: './gradle/dependencies.gradle'
 
 apply from: './gradle/unit-test.gradle'
 apply from: './gradle/integration-test.gradle'
 apply from: './gradle/api-test.gradle'
 apply from: './gradle/archunit-test.gradle'
+apply from: './gradle/contract-test.gradle'
 apply from: './gradle/jacoco.gradle'
 apply from: './gradle/sonar.gradle'
 

@@ -6,20 +6,7 @@ sourceSets {
 }
 
 configurations {
-    apiTestImplementation.extendsFrom implementation
-}
-
-dependencies {
-    apiTestImplementation 'org.springframework.boot:spring-boot-starter-test'
-    apiTestImplementation 'org.springframework.security:spring-security-test'
-    apiTestImplementation 'io.rest-assured:rest-assured:3.2.0'
-    apiTestImplementation 'io.rest-assured:spring-mock-mvc:3.2.0'
-    apiTestImplementation 'ch.vorburger.mariaDB4j:mariaDB4j-springboot:2.4.0'
-    apiTestImplementation 'org.mariadb.jdbc:mariadb-java-client:2.2.5'
-
-    apiTestImplementation 'org.junit.jupiter:junit-jupiter-api'
-    apiTestImplementation 'org.junit.jupiter:junit-jupiter-params'
-    apiTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    apiTestImplementation.extendsFrom testImplementation
 }
 
 task apiTest(type: Test) {
@@ -32,4 +19,8 @@ task apiTest(type: Test) {
     useJUnitPlatform()
     shouldRunAfter integTest, unitTest
 }
-test.dependsOn apiTest
+
+test {
+    exclude 'top/bujiaban/test/contracts/**/*'
+}
+check.dependsOn apiTest

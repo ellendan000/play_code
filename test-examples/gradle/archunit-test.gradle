@@ -6,15 +6,8 @@ sourceSets {
 }
 
 configurations {
-    archUnitTestImplementation.extendsFrom implementation
-    archUnitTestRuntimeOnly.extendsFrom runtimeOnly
-}
-
-dependencies {
-    archUnitTestImplementation 'com.tngtech.archunit:archunit-junit5:0.14.1'
-    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-api'
-    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-params'
-    archUnitTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    archUnitTestImplementation.extendsFrom testImplementation
+    archUnitTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 task archUnitTest(type: Test) {
@@ -26,4 +19,4 @@ task archUnitTest(type: Test) {
 
     useJUnitPlatform()
 }
-test.dependsOn archUnitTest
+check.dependsOn archUnitTest

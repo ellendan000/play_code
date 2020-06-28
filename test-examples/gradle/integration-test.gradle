@@ -3,28 +3,11 @@ sourceSets {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output
     }
-    apiTest {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.main.output
-    }
 }
 
 configurations {
-    integTestImplementation.extendsFrom implementation
-    integTestRuntimeOnly.extendsFrom runtimeOnly
-}
-
-dependencies {
-    integTestImplementation 'org.springframework.boot:spring-boot-starter-test'
-    integTestImplementation 'org.springframework.security:spring-security-test'
-    integTestImplementation 'io.rest-assured:rest-assured:3.2.0'
-    integTestImplementation 'io.rest-assured:spring-mock-mvc:3.2.0'
-    integTestImplementation 'ch.vorburger.mariaDB4j:mariaDB4j-springboot:2.4.0'
-    integTestImplementation 'org.mariadb.jdbc:mariadb-java-client:2.2.5'
-
-    integTestImplementation 'org.junit.jupiter:junit-jupiter-api'
-    integTestImplementation 'org.junit.jupiter:junit-jupiter-params'
-    integTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    integTestImplementation.extendsFrom testImplementation
+    integTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 task integTest(type: Test) {

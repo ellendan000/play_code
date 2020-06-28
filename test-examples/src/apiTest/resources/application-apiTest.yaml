@@ -13,6 +13,4 @@ spring:
 
 mariaDB4j:
   databaseName: key-metrics
-  port: 3307
-  dataDir: mariadb/data/local
-  baseDir: mariadb
+  port: 3308

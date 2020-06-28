@@ -1,3 +1,4 @@
+//https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
 sourceSets {
     unitTest {
         compileClasspath += sourceSets.main.output
@@ -5,25 +6,9 @@ sourceSets {
     }
 }
 
-apply plugin: 'io.spring.dependency-management'
-
-dependencyManagement {
-    imports {
-        mavenBom "org.junit:junit-bom:5.3.2"
-    }
-}
-
 configurations {
     unitTestImplementation.extendsFrom testImplementation
-}
-
-dependencies {
-    unitTestImplementation 'org.junit.jupiter:junit-jupiter-api'
-    unitTestImplementation 'org.junit.jupiter:junit-jupiter-params'
-    unitTestImplementation 'org.junit.jupiter:junit-jupiter-engine'
-    unitTestImplementation "org.mockito:mockito-core:2.22.0"
-    unitTestImplementation "org.mockito:mockito-junit-jupiter:2.22.0"
-    unitTestImplementation "org.assertj:assertj-core:3.11.1"
+    unitTestCompileOnly.extendsFrom testCompileOnly
 }
 
 task unitTest(type: Test) {

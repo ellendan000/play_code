@@ -1,4 +1,4 @@
-package top.bujiaban.test;
+package top.bujiaban.test.api;
 
 import com.google.common.collect.Sets;
 import io.restassured.http.ContentType;
@@ -26,9 +26,13 @@ public class DevOpsInboundAPITest extends APITestBase {
                 .body()
                 .as(LatestPipelineInfoResponse[].class);
 
-        Assertions.assertThat(result).containsOnly(
-                new LatestPipelineInfoResponse("test_pipeline_name", Sets.newHashSet(
-                        new LatestPipelineInfoResponse.LatestEnvironmentInfo("ci", 123L)
+        Assertions.assertThat(result).containsExactlyInAnyOrder(
+                new LatestPipelineInfoResponse("lead-management-normal-master", Sets.newHashSet(
+                        new LatestPipelineInfoResponse.LatestEnvironmentInfo("ci", 847L),
+                        new LatestPipelineInfoResponse.LatestEnvironmentInfo("qa", 846L)
+                )),
+                new LatestPipelineInfoResponse("lead-management-normal-release", Sets.newHashSet(
+                        new LatestPipelineInfoResponse.LatestEnvironmentInfo("uat", 843L)
                 ))
         );
 

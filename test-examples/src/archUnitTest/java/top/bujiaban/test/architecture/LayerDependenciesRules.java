@@ -1,4 +1,4 @@
-package top.bujiaban.test;
+package top.bujiaban.test.architecture;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;

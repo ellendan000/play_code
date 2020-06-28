@@ -1,0 +1,10 @@
+apply plugin: 'org.springframework.cloud.contract'
+
+test {
+    useJUnitPlatform()
+}
+
+contracts {
+    packageWithBaseClasses = 'top.bujiaban.test.contracts'
+    testFramework 'JUNIT5'
+}
