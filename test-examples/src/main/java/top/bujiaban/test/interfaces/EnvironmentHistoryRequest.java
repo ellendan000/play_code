@@ -16,7 +16,6 @@ import java.util.Date;
 public class EnvironmentHistoryRequest {
     private String sequence;
     @JsonProperty("name")
-    @NotNull
     private String envName;
     private String status;
     private Date triggeredTime;

@@ -68,6 +68,17 @@ class DevOpsInboundControllerTest {
     }
 
     @Test
+    void shouldFetchLatestInfoWhenRequestPathInvalid() throws Exception {
+        given().header(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .auth()
+                .principalWithCredentials("", "", "ROLE_USER")
+                .when()
+                .get("/customers/{customerId}/projects/{projectId}", -1, 2)
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
     void shouldFetchLatestInfoCorrectly() throws Exception {
         Set<LatestPipelineInfoDTO> givenDto = newHashSet(
                 LatestPipelineInfoDTO.builder()
