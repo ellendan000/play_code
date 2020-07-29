@@ -1,3 +1,6 @@
 rootProject.name = 'play_code'
 include 'test-examples'
+include 'state-machine'
+include 'mongodb'
+include 'webflux'
 

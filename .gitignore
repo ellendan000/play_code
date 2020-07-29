@@ -12,3 +12,5 @@ build
 
 # Ignore test mariaDB files
 **/mariadb
+
+java_pid*.*
