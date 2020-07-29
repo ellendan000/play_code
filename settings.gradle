@@ -3,4 +3,5 @@ include 'test-examples'
 include 'state-machine'
 include 'mongodb'
 include 'webflux'
+include 'cloud-gateway'
 

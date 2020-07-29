@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+provider:
+  baseUrl: http://localhost:8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: showEmployee
+          uri: ${provider.baseUrl}/employees/{id}
+          predicates:
+            - Path=/employees/{id}
+        - id: listEmployees
+          uri: ${provider.baseUrl}/employees
+          predicates:
+            - Path=/employees

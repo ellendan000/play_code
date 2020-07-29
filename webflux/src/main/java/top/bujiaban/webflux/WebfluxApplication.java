@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BootstrapApplication {
+public class WebfluxApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BootstrapApplication.class, args);
+        SpringApplication.run(WebfluxApplication.class, args);
     }
 }
