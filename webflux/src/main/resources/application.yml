@@ -5,3 +5,13 @@
 #    enabled: false
 #  okhttp:
 #    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8181/eureka
+    fetch-registry: true
+    register-with-eureka: true
+spring:
+  application:
+    name: webflux

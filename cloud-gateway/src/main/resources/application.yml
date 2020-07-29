@@ -16,3 +16,28 @@ spring:
           uri: ${provider.baseUrl}/employees
           predicates:
             - Path=/employees
+        - id: webflux
+          uri: lb://webflux
+          predicates:
+            - Path=/webflux/**
+          filters:
+            - RewritePath=/webflux/(?<path>.*), /$\{path}
+      discovery:
+        locator:
+          enabled: true
+  application:
+    name: gateway
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8181/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
