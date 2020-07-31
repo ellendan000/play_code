@@ -1,21 +1,15 @@
 server:
   port: 8081
 
-provider:
-  baseUrl: http://localhost:8080
-
 spring:
   cloud:
     gateway:
       routes:
-        - id: showEmployee
-          uri: ${provider.baseUrl}/employees/{id}
+        - id: getEmployee
+          uri: http://localhost:8080
           predicates:
             - Path=/employees/{id}
-        - id: listEmployees
-          uri: ${provider.baseUrl}/employees
-          predicates:
-            - Path=/employees
+            - Method=GET
         - id: webflux
           uri: lb://webflux
           predicates:
@@ -25,7 +19,10 @@ spring:
       discovery:
         locator:
           enabled: true
-  application:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
     name: gateway
 
 
@@ -41,3 +38,14 @@ management:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    reactor:
+      netty: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
+
+
