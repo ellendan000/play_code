@@ -1,0 +1,22 @@
+server:
+  port: 8080
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+        timeout:
+          enabled: true
+        circuitBreaker:
+          enabled: true
+          errorThresholdPercentage: 10
+logging:
+  level:
+    com:
+      netflix:
+        hystrix: DEBUG
