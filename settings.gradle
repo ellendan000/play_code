@@ -6,4 +6,5 @@ include 'webflux'
 include 'cloud-gateway'
 include 'open-java'
 include 'netflix-cloud'
+include 'cloud-sleuth'
 

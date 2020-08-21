@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8989
 feign:
   hystrix:
     enabled: true
@@ -20,3 +20,10 @@ logging:
     com:
       netflix:
         hystrix: DEBUG
+spring:
+  application:
+    name: netflix
+  sleuth:
+    messaging:
+      kafka:
+        enabled: false

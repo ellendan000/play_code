@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+}
+
+dependencies {
+    implementation platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    compileOnly platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    annotationProcessor platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    implementation 'org.springframework.kafka:spring-kafka:2.4.8.RELEASE'
+
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+}

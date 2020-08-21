@@ -6,9 +6,9 @@ import org.springframework.statemachine.config.EnableStateMachine;
 
 @SpringBootApplication
 @EnableStateMachine
-public class Application {
+public class StatemachineApp {
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(Application.class);
+        SpringApplication application = new SpringApplication(StatemachineApp.class);
         application.run(args);
     }
 }
