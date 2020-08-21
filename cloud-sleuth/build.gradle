@@ -14,7 +14,7 @@ dependencies {
 
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-    implementation 'org.springframework.kafka:spring-kafka:2.4.8.RELEASE'
+    implementation 'org.springframework.kafka:spring-kafka'
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
