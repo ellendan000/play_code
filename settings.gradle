@@ -7,4 +7,7 @@ include 'cloud-gateway'
 include 'open-java'
 include 'netflix-cloud'
 include 'cloud-sleuth'
+include 'kafka'
+include 'flink'
+include 'snowflake'
 
