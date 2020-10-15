@@ -14,3 +14,6 @@ build
 **/mariadb
 
 java_pid*.*
+
+**/log/
+**/logs/

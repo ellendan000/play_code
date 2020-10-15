@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: pinpoint
+
+server:
+  port: 8981

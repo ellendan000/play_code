@@ -2,6 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
 }
 
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation platform('com.github.ellendan000:dependencies-bom:0.3.1-SNAPSHOT')
     compileOnly platform('com.github.ellendan000:dependencies-bom:0.3.1-SNAPSHOT')
@@ -12,22 +18,13 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
     implementation 'org.springframework.kafka:spring-kafka'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
-    testImplementation 'com.github.tomakehurst:wiremock-jre8:2.27.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.rest-assured:rest-assured:4.3.0'
-    testImplementation 'io.rest-assured:spring-mock-mvc:4.3.0'
 }
 
-test {
-    useJUnitPlatform()
-}
+//-javaagent:./pinpoint-agent-2.1.0/point-bootstrap-2.1.0.jar
+//-Dpinpoint.agentId=test-1
+//-Dpinpoint.applicationName=test-pinpoint
+//-Dpinpoint.profiler.profiles.active=release

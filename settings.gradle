@@ -10,4 +10,5 @@ include 'cloud-sleuth'
 include 'kafka'
 include 'flink'
 include 'snowflake'
+include 'pinpoint'
 
