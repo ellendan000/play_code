@@ -17,4 +17,5 @@ public class SleuthApp {
     public NewTopic userTopic() {
         return new NewTopic("userTopic", 1, (short) 1);
     }
+
 }

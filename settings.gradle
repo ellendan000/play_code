@@ -11,4 +11,5 @@ include 'kafka'
 include 'flink'
 include 'snowflake'
 include 'pinpoint'
+include 'data-redis'
 

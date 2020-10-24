@@ -20,10 +20,17 @@ logging:
     com:
       netflix:
         hystrix: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
 spring:
   application:
     name: netflix
   sleuth:
+    sampler:
+      probability: 1.0
     messaging:
       kafka:
-        enabled: false
+        enabled: true

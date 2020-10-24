@@ -2,3 +2,16 @@ spring:
   kafka:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  sleuth:
+    sampler:
+      probability: 1.0
+    messaging:
+      kafka:
+        enabled: true
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
