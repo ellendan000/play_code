@@ -13,4 +13,8 @@ public class Main {
         Configuration configuration = new Configuration(properties);
         return configuration.createFutureGetter();
     }
+
+    public static void main(String[] args) {
+        System.out.println("hello jenkins");
+    }
 }
