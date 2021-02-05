@@ -1,9 +1,5 @@
-plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-}
-
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    implementation platform(platformBom)
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.statemachine:spring-statemachine-starter:2.2.0.RELEASE'
 }

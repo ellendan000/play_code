@@ -1,9 +1,7 @@
-plugins {
-    id 'org.springframework.boot' version '2.1.6.RELEASE'
-}
-
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    implementation platform(platformBom)
+    annotationProcessor platform(platformBom)
+    compileOnly platform(platformBom)
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     compileOnly 'org.projectlombok:lombok'

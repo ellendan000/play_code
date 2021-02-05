@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
+//    id 'org.springframework.boot' version '2.2.6.RELEASE'
     id "org.springframework.cloud.contract" version "2.1.4.RELEASE"
     id "org.sonarqube" version "2.7"
 }
@@ -13,7 +13,7 @@ apply from: './gradle/jacoco.gradle'
 apply from: './gradle/sonar.gradle'
 
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    implementation platform(platformBom)
 
     //Spring
     implementation 'org.springframework.boot:spring-boot-starter-web'

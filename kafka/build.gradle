@@ -1,9 +1,7 @@
-plugins {
-    id 'java'
-}
-
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.1-SNAPSHOT')
+    implementation platform(platformBom)
+    annotationProcessor platform(platformBom)
+    compileOnly platform(platformBom)
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
 

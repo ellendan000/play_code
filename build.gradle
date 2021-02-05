@@ -1,3 +1,7 @@
+ext {
+    platformBom = 'com.github.ellendan000.servicestemplate:dependencies-bom:0.4.4-SNAPSHOT'
+}
+
 subprojects {
     buildscript {
         repositories {
@@ -15,13 +19,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven { url 'https://repo.spring.io/release/' }
-        maven {
-            url 'https://maven.pkg.github.com/ellendan000/service_template'
-            credentials {
-                username = System.getenv("ACCESS_USER")?:"${repoUser}"
-                password = System.getenv("PACKAGES_ACCESS_TOKEN")?:"${repoToken}"
-            }
-        }
+        maven { url 'https://jitpack.io' }
     }
 
     configurations.all {

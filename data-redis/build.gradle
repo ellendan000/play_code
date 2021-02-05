@@ -1,17 +1,16 @@
-plugins {
-    id 'java'
-}
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-
-}
-
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.1-SNAPSHOT')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.data:spring-data-redis:2.1.9.RELEASE'
-    compile 'redis.clients:jedis:3.3.0'
+    implementation platform(platformBom)
+    compileOnly platform(platformBom)
+    annotationProcessor platform(platformBom)
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'com.google.guava:guava'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.springframework.data:spring-data-redis'
+//    implementation 'io.lettuce:lettuce-core'
+    compile 'redis.clients:jedis'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }

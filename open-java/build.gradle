@@ -1,5 +1,5 @@
 dependencies {
-    implementation platform('com.github.ellendan000:dependencies-bom:0.3.0-SNAPSHOT')
+    implementation platform(platformBom)
     implementation 'com.google.guava:guava:27.0.1-jre'
     implementation 'org.javatuples:javatuples:1.2'
 
