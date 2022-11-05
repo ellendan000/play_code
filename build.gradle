@@ -1,25 +1,30 @@
 ext {
-    platformBom = 'com.github.ellendan000.servicestemplate:dependencies-bom:0.4.4-SNAPSHOT'
+    platformBom = 'com.ellendan.service-template:dependencies-bom:0.6.0-SNAPSHOT'
+}
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.6.RELEASE'
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.13.RELEASE"
+    }
 }
 
 subprojects {
-    buildscript {
-        repositories {
-            mavenCentral()
-            maven { url 'https://repo.spring.io/release/' }
-        }
-    }
-
     group "top.bujiaban"
 
     apply plugin: "java"
+    apply plugin: 'org.springframework.boot'
+    apply plugin: "io.spring.dependency-management"
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
     repositories {
         mavenCentral()
         maven { url 'https://repo.spring.io/release/' }
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://gitlab.com/api/v4/projects/39170322/packages/maven' }
     }
 
     configurations.all {

@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    azure:
+      credential:
+        client-id: ${AZURE_CLIENT_ID}
+        client-secret: ${AZURE_CLIENT_SECRET}
+        profile:
+          tenant-id: ${AZURE_TENANT_ID}
+      keyvault:
+        secret:
+          property-sources:
+            - name: key-vault-property-source-1
+              endpoint: ${ENDPOINT_1}

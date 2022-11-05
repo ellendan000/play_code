@@ -12,4 +12,5 @@ include 'flink'
 include 'snowflake'
 include 'pinpoint'
 include 'data-redis'
+include 'cloud-azure'
 
